@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+    <book id="1">
+        <title>XML Fundamentals</title>
+        <author>John Doe</author>
+        <price>29.99</price>
+    </book>
+    <book id="2">
+        <title>Mastering JavaScript</title>
+        <author>Jane Smith</author>
+        <price>39.99</price>
+    </book>
+    <book id="3">
+        <title>HTML and CSS: Design and Build Websites</title>
+        <author>Richard Roe</author>
+        <price>24.99</price>
+    </book>
+</catalog>

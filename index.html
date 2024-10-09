@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Catalogue</title>
+</head>
+<body>
+    <h1>Book Catalogue</h1>
+    <div id="catalogue"></div>
+
+    <script>
+        fetch('book.xml')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.text();
+            })
+            .then(xmlText => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+                const books = xmlDoc.getElementsByTagName("book");
+                let htmlContent = "<ul>";
+                for (let book of books) {
+                    htmlContent += `<li>
+                        Title: ${book.getElementsByTagName("title")[0].childNodes[0].nodeValue}<br>
+                        Author: ${book.getElementsByTagName("author")[0].childNodes[0].nodeValue}<br>
+                        Price: ${book.getElementsByTagName("price")[0].childNodes[0].nodeValue}
+                    </li>`;
+                }
+                htmlContent += "</ul>";
+                document.getElementById("catalogue").innerHTML = htmlContent;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

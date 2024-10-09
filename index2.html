@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profiles</title>
+</head>
+<body>
+    <h1>User Profiles</h1>
+    <div id="profiles"></div>
+
+    <script>
+        fetch('userprofiles.json') 
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                let htmlContent = "<ul>";
+                data.forEach(user => {
+                    htmlContent += `<li>
+                        First Name: ${user.firstName}<br>
+                        Last Name: ${user.lastName}<br>
+                        Email: ${user.email}<br>
+                        Date of Birth: ${user.dateOfBirth}<br>
+                        Preferences:
+                        <ul>
+                            <li>Theme: ${user.preferences.theme}</li>
+                            <li>Language: ${user.preferences.language}</li>
+                            <li>Notifications: ${user.preferences.notifications ? 'Enabled' : 'Disabled'}</li>
+                        </ul>
+                    </li>`;
+                });
+                htmlContent += "</ul>";
+                document.getElementById("profiles").innerHTML = htmlContent;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
